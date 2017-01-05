@@ -17,6 +17,6 @@ console.log(ul); // Should result in
 <ul class="todo">
   <li data-id="1">Learn JavaScript</li>
   <li data-id="2">Learn JavaScript even better</li>
-  <li data-id="3">Learn to test code</li>
+  <li data-id="3">Learn testing</li>
 </ul>
 ```
