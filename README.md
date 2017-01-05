@@ -6,7 +6,7 @@
 var data = [ 
   { id: 1, task: "Learn JavaScript" },
   { id: 2, task: "Learn JavaScript even better" },
-  { id: 3, task: "Learn to test cdoe" }
+  { id: 3, task: "Learn testing" }
 ];
 
 var list = data.map(task => jsHTML.li({"data-id": task.id}, task.name));
