@@ -4,9 +4,9 @@
 
 ```javascript
 var data = [ 
-  { id: 1, task: "Learn JavaScript" },
-  { id: 2, task: "Learn JavaScript even better" },
-  { id: 3, task: "Learn testing" }
+  { id: 1, name: "Learn JavaScript" },
+  { id: 2, name: "Learn JavaScript even better" },
+  { id: 3, name: "Learn testing" }
 ];
 
 var list = data.map(task => jsHTML.li({"data-id": task.id}, task.name));
