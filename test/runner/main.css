@@ -1,0 +1,47 @@
+body {
+  margin: 0;
+  padding: 0;
+  font: normal 16px/150% "Helvetica Neue", sans-serif;
+  font-weight: 300;
+  color: #333;
+}
+
+ul {
+  list-style: none;
+}
+
+li {
+  padding: 5px 10px;
+  margin: 5px;
+  border-radius: 5px;
+  color: white;
+}
+
+.title {
+  text-transform: capitalize;
+  text-align: center;
+  font-weight: 100;
+}
+
+#container {
+  max-width: 960px;
+  width: 100%;
+  margin: 20px auto;
+}
+
+li.false {
+  background: crimson;
+}
+
+li.false::before {
+  content: "x ";
+  font-weight: bolder;
+}
+
+li.true {
+  background: lime;
+}
+
+li.true::before {
+  content: "✓ ";
+}

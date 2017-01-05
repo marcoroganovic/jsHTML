@@ -1,9 +1,9 @@
 var jsHTML = (function() {
   
-  var ELEMENTS = "p ul li h1 h2 h3 h4 h5 h6 "
-  ELEMENTS += "div section article header aside footer "
+  var ELEMENTS = "p ul li h1 h2 h3 h4 h5 h6 ";
+  ELEMENTS += "div section article header aside footer ";
   ELEMENTS += "span mark table th tr td form input button";
-  ELEMENTS = ELEMENTS.split(" ");
+  ELEMENTS = ELEMENTS.split( );
 
   function assignAttrs(el, attrs) {
     for(let prop in attrs) {
