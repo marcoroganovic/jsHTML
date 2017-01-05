@@ -30,7 +30,7 @@ describe("jsHTML", function() {
 
   nodesEqual(p, testP, "it should pass since both elements have class 'description' and same content");
 
-  var section = jsHTML.section({className: "into"}, "Intro content");
+  var section = jsHTML.section({className: "intro"}, "Intro content");
   console.log(section);
   var testSection = document.createElement("section");
 
