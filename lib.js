@@ -1,17 +1,15 @@
 var jsHTML = (function() {
   
   var ELEMENTS;
-  ELEMENTS = "p ul li h1 h2 h3 h4 h5 h6 ";
+  ELEMENTS = "a p ul li h1 h2 h3 h4 h5 h6 ";
   ELEMENTS += "div section article header nav aside footer ";
   ELEMENTS += "span mark table th tr td form input button";
   ELEMENTS = ELEMENTS.split(" ");
 
   function assignAttrs(el, attrs) {
     for(let prop in attrs) {
-      if(prop === "className") {
-        el.setAttribute("class", attrs[prop]);
-      } else {
-        el.setAttribute(prop, attrs[prop]);
+      if(Object.hasOwnProperty.call(attrs, prop)) {
+        el.setAttribute((prop === "className" ? "class" : prop), attrs[prop]);
       }
     }
     return el;
