@@ -1,6 +1,6 @@
 ## Small library for creating DOM elements via function calls
 
-### Example
+### Example 1
 
 ```javascript
 var data = [ 
@@ -19,4 +19,34 @@ console.log(ul); // Should result in
   <li data-id="2">Learn JavaScript even better</li>
   <li data-id="3">Learn testing</li>
 </ul>
+```
+
+### Example 2
+```javascript
+const Link = (props) => {
+  return jsHTML.a({ href: `${props.href}.html` }, `${props.name}`);
+}
+
+const Navigation = (props) => {
+  var links = props.links;
+  var list = links.map(link => Link(link));
+  
+  return jsHTML.nav({ className: "navigation" }, list);
+}
+
+const props = {
+  links: [
+    { name: "Home", href: "index" }, 
+    { name: "About", href: "about" }, 
+    { name: "Contact", href: "contact" }
+  ]
+}
+
+console.log(Navigation(props)); // Should result in
+
+<nav class="navigation">
+  <a href="index.html">Home</a>
+  <a href="about.html">About</a>
+  <a href="contact.html">Contact</a>
+</nav>
 ```
