@@ -12,7 +12,7 @@ var data = [
 var list = data.map(task => jsHTML.li({"data-id": task.id}, task.name));
 var ul = jsHTML.ul({ className: "todo" }, list);
 
-// Should result in
+console.log(ul); // Should result in
 
 <ul class="todo">
   <li data-id="1">Learn JavaScript</li>
