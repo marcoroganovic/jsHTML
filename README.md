@@ -1,4 +1,4 @@
-# Small library for create DOM structure via function calls
+## Small library for creating DOM elements via function calls
 
 ### Example
 
