@@ -48,14 +48,12 @@ describe("jsHTML", function() {
 
   nodesEqual(p, pTest, "it should return empty element when first argument is empty object and second is empty string");
   nodesNotEqual(p, span, "it should return false when we are comparing different elements");
-
   nodesEqual(ul, ulTest, "it should return empty ul  when second artument is empty array");
 
   ul = jsHTML.ul({}, [li1, li2]);
   ulTest.appendChild(li1Test);
   ulTest.appendChild(li2Test);
-  console.log(ul);
-  console.log(ulTest);
+  
   nodesEqual(ul, ulTest, "it should append elements to parent when second argument is array that contains DOM nodes");
 });
 
