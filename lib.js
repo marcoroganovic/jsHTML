@@ -1,7 +1,7 @@
 var jsHTML = (function() {
   
   var ELEMENTS;
-  ELEMENTS =  "a p ul li h1 h2 h3 h4 h5 h6 ";
+  ELEMENTS =  "html body a p ul li h1 h2 h3 h4 h5 h6 ";
   ELEMENTS += "div section article header nav aside footer ";
   ELEMENTS += "span mark table th tr td form input button ";
   ELEMENTS += "audio video canvas time script style";
@@ -23,7 +23,9 @@ var jsHTML = (function() {
       var text = document.createTextNode(textOrNodes);
       el.appendChild(text);
     } else if(Array.isArray(textOrNodes)) {
-      textOrNodes.forEach(node => el.appendChild(node));
+      textOrNodes.forEach(node => {
+        if(node.nodeType) el.appendChild(node);
+      });
     } else {
       el.appendChild(textOrNodes);
     }
