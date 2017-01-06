@@ -7,6 +7,18 @@ var {
 var p = jsHTML.p({}, null);
 var pTest = document.createElement("p");
 
+var ul = jsHTML.ul({}, []);
+var ulTest = document.createElement("ul");
+
+var li1 = jsHTML.li({}, "Task 1");
+var li2 = jsHTML.li({}, "Task 2");
+
+var li1Test = document.createElement("li");
+li1Test.appendChild(document.createTextNode("Task 1"));
+
+var li2Test = document.createElement("li");
+li2Test.appendChild(document.createTextNode("Task 2"));
+
 describe("jsHTML", function() {
 
   nodesEqual(p, pTest, "it should return plain element when first argument is empty object and second is null");
@@ -36,6 +48,15 @@ describe("jsHTML", function() {
 
   nodesEqual(p, pTest, "it should return empty element when first argument is empty object and second is empty string");
   nodesNotEqual(p, span, "it should return false when we are comparing different elements");
+
+  nodesEqual(ul, ulTest, "it should return empty ul  when second artument is empty array");
+
+  ul = jsHTML.ul({}, [li1, li2]);
+  ulTest.appendChild(li1Test);
+  ulTest.appendChild(li2Test);
+  console.log(ul);
+  console.log(ulTest);
+  nodesEqual(ul, ulTest, "it should append elements to parent when second argument is array that contains DOM nodes");
 });
 
 run("#container");
