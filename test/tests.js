@@ -4,37 +4,38 @@ var {
   nodesNotEqual, run 
 } = Assert;
 
+var p = jsHTML.p({}, null);
+var pTest = document.createElement("p");
 
 describe("jsHTML", function() {
-  var testTree = document.createElement("header");
-  var h1 = document.createElement("h1");
-  var nav = document.createElement("nav");
-  testTree.appendChild(h1);
-  testTree.appendChild(nav);
+
+  nodesEqual(p, pTest, "it should return plain element when first argument is empty object and second is null");
   
-  var tree = jsHTML.header({}, [jsHTML.h1({}, null), jsHTML.nav({}, null)]);
-  nodesEqual(tree, testTree, "it should pass since both trees contain same structure and elements");
+  p = jsHTML.p({}, "hello");
+  pTest.appendChild(document.createTextNode("hello"));
 
-  var span = jsHTML.span({}, "hello");
-  var testSpan = document.createElement("span");
-  var testTextNode = document.createTextNode("hello");
-  testSpan.appendChild(testTextNode);
+  nodesEqual(p, pTest, "it should pass since both elements have same content in them but no attributes");
 
-  nodesEqual(span, testSpan, "it should pass since both are span elements and have word 'hello' in it");
+  p = jsHTML.p({className: "description"}, "hello");
+  pTest.setAttribute("class", "description");
+  
+  nodesEqual(p, pTest, "it should pass since both elements have class attribute with same value and same inner content");
 
-  var p = jsHTML.p({className: "description"}, "Lorem ipsum dolor sit amet adipisicing...")
-  var testP = document.createElement("p");
-  testP.setAttribute("class", "description");
-  var testPTextNode = document.createTextNode("Lorem ipsum dolor sit amet adipisicing...");
-  testP.appendChild(testPTextNode);
+  p = jsHTML.p({}, jsHTML.span({}, "Span Element"));
+  pTest = document.createElement("p");
+  span = document.createElement("span");
+  spanText = document.createTextNode("Span Element");
+  span.appendChild(spanText);
+  pTest.appendChild(span);
 
-  nodesEqual(p, testP, "it should pass since both elements have class 'description' and same content");
+  nodesEqual(p, pTest, "it should nest element inside when second argument is actual DOM node");
 
-  var section = jsHTML.section({className: "intro"}, "Intro content");
-  console.log(section);
-  var testSection = document.createElement("section");
+  p = jsHTML.p({}, "");
+  pTest = document.createElement("p");
+  pTest.appendChild(document.createTextNode(""));
 
-  nodesNotEqual(section, testSection, "it should pass since elements are different");
+  nodesEqual(p, pTest, "it should return empty element when first argument is empty object and second is empty string");
+  nodesNotEqual(p, span, "it should return false when we are comparing different elements");
 });
 
 run("#container");
