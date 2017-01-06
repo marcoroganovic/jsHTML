@@ -1,12 +1,29 @@
 var jsHTML = (function() {
   
   var ELEMENTS;
-  ELEMENTS =  "html body a p ul li h1 h2 h3 h4 h5 h6 ";
+  ELEMENTS =  "html head meta title link script style ";
+  ELEMENTS += "body a p ul li h1 h2 h3 h4 h5 h6 ";
   ELEMENTS += "div section article header nav aside footer ";
   ELEMENTS += "span mark table th tr td form input button ";
-  ELEMENTS += "audio video canvas time script style";
+  ELEMENTS += "audio video canvas time";
   ELEMENTS =  ELEMENTS.split(" ");
 
+  function is(type, arg) {
+    return typeof arg === type;
+  }
+
+  function isString(arg) {
+    return is("string", arg);
+  }
+
+  function isFunction(arg) {
+    return is("function", arg);
+  }
+
+  function isArray(arg) {
+    return Array.isArray(arg);
+  }
+  
   function assignAttrs(el, attrs) {
     for(let prop in attrs) {
       if(Object.hasOwnProperty.call(attrs, prop)) {
@@ -19,10 +36,10 @@ var jsHTML = (function() {
   function appendNodes(el, textOrNodes) {
     if(textOrNodes === null) {
       return el;
-    } else if(typeof textOrNodes === "string") {
+    } else if(isString(textOrNodes)) {
       var text = document.createTextNode(textOrNodes);
       el.appendChild(text);
-    } else if(Array.isArray(textOrNodes)) {
+    } else if(isArray(textOrNodes)) {
       textOrNodes.forEach(node => {
         if(node.nodeType) el.appendChild(node);
       });
