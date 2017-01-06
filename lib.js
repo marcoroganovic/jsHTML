@@ -1,12 +1,18 @@
 var jsHTML = (function() {
-  
-  var ELEMENTS;
-  ELEMENTS =  "html head meta title link script style ";
-  ELEMENTS += "body a p ul li h1 h2 h3 h4 h5 h6 ";
-  ELEMENTS += "div section article header nav aside footer ";
-  ELEMENTS += "span mark table th tr td form input button ";
-  ELEMENTS += "audio video canvas time";
-  ELEMENTS =  ELEMENTS.split(" ");
+
+  "use strict";
+
+  var ELEMENTS = ['address', 'applet', 'area', 'article', 'aside', 'base', 
+    'basefont', 'bgsound', 'blockquote', 'body', 'br', 'button', 'caption', 
+    'center', 'col', 'colgroup', 'dd', 'details', 'dir', 'div', 'dl', 'dt', 
+    'embed', 'fieldset', 'figcaption', 'figure', 'footer', 'form', 'frame', 
+    'frameset', 'h1', 'h2', 'h3', 'h4', 'h5', 'h6', 'head', 'header', 'hgroup', 
+    'hr', 'html', 'iframe', 'img', 'input', 'isindex', 'li', 'link', 'listing', 
+    'main', 'marquee', 'menu', 'menuitem', 'meta', 'nav', 'noembed', 'noframes', 
+    'noscript', 'object', 'ol', 'p', 'param', 'plaintext', 'pre', 'script', 
+    'section', 'select', 'source', 'style', 'summary', 'table', 'tbody', 'td', 
+    'template', 'textarea', 'tfoot', 'th', 'thead', 'title', 'tr', 'track', 
+    'ul', 'wbr', 'xmp'];
 
   function is(type, arg) {
     return typeof arg === type;
