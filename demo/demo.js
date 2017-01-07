@@ -1,8 +1,9 @@
 var COLLECTION = [
-  {id: 1, name: "Learn JavaScript", completed: false}, 
-  {id: 2, name: "Learn JavaScript even better", completed: false},
-  {id: 3, name: "Learn Test-Driven Development", completed: false},
-  {id: 4, name: "Build something meaningful", completed: false}
+  {id: 1,  name: "Generate some ideas", completed: true },
+  {id: 2, name: "Learn JavaScript", completed: false}, 
+  {id: 3, name: "Learn JavaScript even better", completed: false},
+  {id: 4, name: "Learn Test-Driven Development", completed: false},
+  {id: 5, name: "Build something meaningful", completed: false}
 ];
 
 var pubsub = {
@@ -129,11 +130,32 @@ var TaskList = (props) => {
   return ul;
 }
 
+var DetailSpan = (props) => {
+  return jsHTML.span({}, props.name + " " + props.status);
+}
+
+var TaskDetails = (props) => {
+  var total = props.collection.length;
+  var completed = props.collection.reduce((count, curr) => {
+    return curr.completed ? count + 1 : count;
+  }, 0);
+  var uncompleted = props.collection.reduce((count, curr) => {
+    return !curr.completed ? count + 1 : count;
+  }, 0);
+
+  return jsHTML.div({className: "details"}, [
+        DetailSpan({name: "Total", status: total}),
+        DetailSpan({name: "Completed", status: completed}),
+        DetailSpan({name: "Uncompleted", status: uncompleted})
+      ]);
+}
+
 var App = (props) => {
   return (
       jsHTML.div({}, [
         Form(), 
-        TaskList({collection: props.collection})
+        TaskList({collection: props.collection}),
+        TaskDetails({ collection: props.collection })
       ])
   );
 }
