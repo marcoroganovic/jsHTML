@@ -9,12 +9,12 @@ var pubsub = {
 
   handlers: {},
 
-  sub: function(type, cb) {
+  addEvent: function(type, cb) {
     this.handlers[type] = this.handlers[type] || [];
     this.handlers[type].push(cb);
   },
   
-  trigger: function(type, obj) {
+  triggerEvent: function(type, obj) {
     if(this.handlers[type]) {
       this.handlers[type].forEach(fn => fn(obj));
     }
@@ -36,11 +36,11 @@ var Form = (props) => {
     var value = e.target[0].value;
     if(value) {
       COLLECTION.push({
-        id: collection.length + 1,
+        id: COLLECTION.length + 1,
         name: value
       });
 
-      pubsub.trigger("render", COLLECTION);
+      pubsub.triggerEvent("render", COLLECTION);
     }
   }
 
@@ -72,7 +72,7 @@ var TaskList = (props) => {
           if(task.id !== id) return task
         });
       }
-      pubsub.trigger("render", COLLECTION);
+      pubsub.triggerEvent("render", COLLECTION);
     }
   }
   
@@ -95,7 +95,7 @@ var App = (props) => {
   );
 }
 
-pubsub.sub("render", function(collection) {
+pubsub.addEvent("render", function(collection) {
   jsHTML.render(App({ collection }), ".container");
 });
 
