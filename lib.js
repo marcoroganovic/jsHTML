@@ -72,8 +72,30 @@ var jsHTML = (function() {
     return this;
   }
 
-  var api = {};
-  api.addTag = addElement;
+  function addEvents(node, events) {
+    if(node && events) {
+      for(let prop in events) {
+        node.addEventListener(prop, events[prop]);
+      }
+    }
+  }
+
+  function render(node, selector) {
+    var element = document.querySelector(selector);
+    if(element) {
+      element.innerHTML = "";
+      element.appendChild(node);
+    } else {
+      console.log("Couldn't find DOM node based on provided selector " + selector);
+    }
+  }
+
+  var api = {
+    addTag: addElement,
+    addEvents: addEvents,
+    render: render
+  }
+
   ELEMENTS.forEach(tag => api[tag] = createNode(tag));
 
   return api;
