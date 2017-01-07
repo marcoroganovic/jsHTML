@@ -1,8 +1,8 @@
 var COLLECTION = [
-  {id: 1, name: "Learn JavaScript"}, 
-  {id: 2, name: "Learn JavaScript even better"},
-  {id: 3, name: "Learn Test-Driven Development"},
-  {id: 4, name: "Build something meaningful"}
+  {id: 1, name: "Learn JavaScript", completed: false}, 
+  {id: 2, name: "Learn JavaScript even better", completed: false},
+  {id: 3, name: "Learn Test-Driven Development", completed: false},
+  {id: 4, name: "Build something meaningful", completed: false}
 ];
 
 var pubsub = {
@@ -31,21 +31,25 @@ var Button = () => {
 
 var Form = (props) => {
   
-  function addTask(e) {
+  function pushTask(val) {
+    COLLECTION.push({
+      id: COLLECTION.length + 1,
+      name: val,
+      completed: false
+    });
+  }
+
+  function handleAddTask(e) {
     e.preventDefault();
     var value = e.target[0].value;
     if(value) {
-      COLLECTION.push({
-        id: COLLECTION.length + 1,
-        name: value
-      });
-
+      pushTask(value);
       pubsub.triggerEvent("render", COLLECTION);
     }
   }
 
   var componentEvents = {
-    "submit": addTask
+    "submit": handleAddTask
   };
 
   var form = jsHTML.form({}, [Input(), Button()]);
@@ -54,8 +58,19 @@ var Form = (props) => {
   return form;
 }
 
+var StateButton = (props) => {
+  return jsHTML.button({
+    className: props.cssClass, 
+    "data-id": props.id
+  }, props.symbol);
+}
+
 var Task = (props) => {
-  return jsHTML.li({"data-id": props.id}, props.name);
+  return jsHTML.li({className: props.completed ? "completed" : "false"}, [
+      jsHTML.text(props.name + " "),
+      StateButton({ cssClass: "complete", symbol: "✓", id: props.id }),
+      StateButton({ cssClass: "remove", symbol: "x", id: props.id })
+  ]);
 }
 
 var TaskList = (props) => {
@@ -63,21 +78,49 @@ var TaskList = (props) => {
     return Task(task);
   });
 
-  function removeElement(e) {
-    var name = e.target.nodeName.toLowerCase();
-    if(name === "li") {
-      var id = +e.target.dataset.id;
-      if(confirm("Are you sure?")) {
-        COLLECTION = COLLECTION.filter(task => {
-          if(task.id !== id) return task
-        });
+  function removeElement(id) {
+    if(confirm("Are you sure?")) {
+      COLLECTION = COLLECTION.filter(task => {
+        if(task.id !== id) return task;
+      });
+    }
+  }
+
+  function handleRemoveElement(e) {
+    var id = +e.target.dataset.id;
+    removeElement(id);
+    pubsub.triggerEvent("render", COLLECTION);
+  }
+
+  function completeTask(id) {
+    COLLECTION = COLLECTION.map((task) => {
+      if(task.id === id) {
+        task.completed = true;
       }
-      pubsub.triggerEvent("render", COLLECTION);
+      return task;
+    });
+  }
+
+  function handleCompletedTask(e) {
+    var id = +e.target.dataset.id;
+    completeTask(id);
+    pubsub.triggerEvent("render", COLLECTION);
+  }
+
+  function handleTaskChange(e) {
+    var name = e.target.className;
+    switch(name) {
+      case "complete":
+        handleCompletedTask(e);
+        break;
+      case "remove":
+        handleRemoveElement(e);
+        break;
     }
   }
   
   var componentEvents = {
-    "click": removeElement
+    "click": handleTaskChange
   };
 
   var ul = jsHTML.ul({}, list);

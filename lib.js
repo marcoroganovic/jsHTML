@@ -66,6 +66,10 @@ var jsHTML = (function() {
     }
   }
 
+  function text(content) {
+    return document.createTextNode(content);
+  }
+
   function addElement(tag) {
     tag = tag.toLowerCase();
     this[tag] = this[tag] || createNode(tag);
@@ -92,6 +96,7 @@ var jsHTML = (function() {
 
   var api = {
     addTag: addElement,
+    text: text,
     addEvents: addEvents,
     render: render
   }
