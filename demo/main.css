@@ -32,3 +32,22 @@ li {
   width: 100%;
   margin: 0 auto;
 }
+
+.details {
+  margin: 0 auto;
+  padding: 0 10px;
+  border-radius: 5px;
+  background: steelblue;
+  color: white;
+  text-align: right;
+  text-transform: lowercase;
+  font-size: 12px;
+}
+
+.details span {
+  margin-right: 10px;
+}
+
+.details span:last-child {
+  margin-right: 0;
+}

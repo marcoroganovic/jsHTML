@@ -131,7 +131,7 @@ var TaskList = (props) => {
 }
 
 var DetailSpan = (props) => {
-  return jsHTML.span({}, props.name + " " + props.status);
+  return jsHTML.span({}, props.name + ": " + props.status);
 }
 
 var TaskDetails = (props) => {
