@@ -135,19 +135,27 @@ var DetailSpan = (props) => {
 }
 
 var TaskDetails = (props) => {
+
   var total = props.collection.length;
   var completed = props.collection.reduce((count, curr) => {
     return curr.completed ? count + 1 : count;
   }, 0);
+
   var uncompleted = props.collection.reduce((count, curr) => {
     return !curr.completed ? count + 1 : count;
   }, 0);
 
-  return jsHTML.div({className: "details"}, [
-        DetailSpan({name: "Total", status: total}),
-        DetailSpan({name: "Completed", status: completed}),
-        DetailSpan({name: "Uncompleted", status: uncompleted})
-      ]);
+  var buttonContent = [
+    { name: "Total", status: total },
+    { name: "Completed", status: completed },
+    { name: "Uncompleted", status: uncompleted }
+  ];
+  
+  var list = buttonContent.map((button) => {
+    return DetailSpan(button);
+  });
+
+  return jsHTML.div({className: "details"}, list);
 }
 
 var App = (props) => {
