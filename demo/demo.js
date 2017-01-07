@@ -1,5 +1,3 @@
-var { ul, li, form, input, button } = jsHTML;
-
 var COLLECTION = [
   {id: 1, name: "Learn JavaScript"}, 
   {id: 2, name: "Learn JavaScript even better"},
