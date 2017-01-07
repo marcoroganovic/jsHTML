@@ -30,7 +30,7 @@ li {
 .container {
   max-width: 640px;
   width: 100%;
-  margin: 0 auto;
+  margin: 20px auto;
 }
 
 .details {
@@ -50,4 +50,25 @@ li {
 
 .details span:last-child {
   margin-right: 0;
+}
+
+form {
+  margin-bottom: 10px;
+}
+
+input,
+form button {
+  padding: 5px;
+  border: 1px solid #ccc;;
+  border-radius: 5px;
+}
+
+form button {
+  margin-left: 5px;
+  background: lightgray;
+  color: white;
+}
+
+button:hover {
+  cursor: pointer;
 }

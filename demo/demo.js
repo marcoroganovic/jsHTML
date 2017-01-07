@@ -67,11 +67,15 @@ var StateButton = (props) => {
 }
 
 var Task = (props) => {
-  return jsHTML.li({className: props.completed ? "completed" : "false"}, [
-      jsHTML.text(props.name + " "),
-      StateButton({ cssClass: "complete", symbol: "✓", id: props.id }),
-      StateButton({ cssClass: "remove", symbol: "x", id: props.id })
-  ]);
+  var buttonsData = [
+    { cssClass: "complete", symbol: "✓", id: props.id },
+    { cssClass: "remove", symbol: "x", id: props.id }
+  ];
+
+  var list = buttonsData.map(data => StateButton(data));
+  list.unshift(jsHTML.text(props.name + " "));
+
+  return jsHTML.li({className: props.completed ? "completed" : "false"}, list);
 }
 
 var TaskList = (props) => {
