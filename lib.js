@@ -125,7 +125,7 @@ var jsHTML = (function() {
     render: render
   }
 
-  ELEMENTS.forEach(tag => api[tag] = createNode(tag));
+  ELEMENTS.forEach(tag => API[tag] = createNode(tag));
 
   return API;
 
