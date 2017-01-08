@@ -92,12 +92,12 @@
     }
   }
 
-  function renderIfDifferent(newEl, oldEl) {
-    if(newEl.outerHTML === oldEl.innerHTML) {
+  function renderIfDifferent(newNodes, container) {
+    if(newNodes.outerHTML === container.innerHTML) {
       return;
     } else {
-      oldEl.innerHTML = "";
-      oldEl.appendChild(newEl);
+      container.innerHTML = "";
+      container.appendChild(newNodes);
     }
   }
 
