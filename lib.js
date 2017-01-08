@@ -4,7 +4,7 @@
   } else if(typeof define === "function" && define.amd) {
     return define([], lib);
   } else {
-    window.dnodify = lib();
+    window.jsHTML = lib();
   }
 })(function() {
 
