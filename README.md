@@ -1,5 +1,8 @@
 ## Small library for creating DOM elements via function calls
 
+You can see how this library is used to build an application
+[here](https://github.com/marcoroganovic/todo-app/)
+
 ### Example 1
 
 ```javascript
