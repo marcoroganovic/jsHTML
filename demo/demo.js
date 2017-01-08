@@ -6,22 +6,6 @@ var COLLECTION = [
   {id: 5, name: "Build something meaningful", completed: false}
 ];
 
-var pubsub = {
-
-  handlers: {},
-
-  addEvent: function(type, cb) {
-    this.handlers[type] = this.handlers[type] || [];
-    this.handlers[type].push(cb);
-  },
-  
-  triggerEvent: function(type, obj) {
-    if(this.handlers[type]) {
-      this.handlers[type].forEach(fn => fn(obj));
-    }
-  }
-}
-
 var Input = ()  => {
   return jsHTML.input({type: "text", placeholder: "Task name"}, null);
 }
@@ -94,7 +78,7 @@ var TaskList = (props) => {
   function handleRemoveElement(e) {
     var id = +e.target.dataset.id;
     removeElement(id);
-    pubsub.triggerEvent("render", COLLECTION);
+    jsHTML.dispatcher.dispatch("render", COLLECTION);
   }
 
   function completeTask(id) {
@@ -109,7 +93,7 @@ var TaskList = (props) => {
   function handleCompletedTask(e) {
     var id = +e.target.dataset.id;
     completeTask(id);
-    pubsub.triggerEvent("render", COLLECTION);
+    jsHTML.dispatcher.dispatch("render", COLLECTION);
   }
 
   function handleTaskChange(e) {
@@ -172,7 +156,7 @@ var App = (props) => {
   );
 }
 
-pubsub.addEvent("render", function(collection) {
+jsHTML.dispatcher.subscribe("render", function(collection) {
   jsHTML.render(App({ collection }), ".container");
 });
 

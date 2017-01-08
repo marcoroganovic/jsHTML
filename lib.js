@@ -94,10 +94,34 @@ var jsHTML = (function() {
     }
   }
 
+  var Dispatcher = {
+    handlers: {},
+
+    subscribe: function(name, cb) {
+      this.handlers[name] = this.handlers[name] || [];
+      this.handlers[name].push(cb);
+    },
+
+    dispatch: function(name, data) {
+      if(this.handlers[name]) {
+        this.handlers[name].forEach(function(cb) {
+          cb(data);
+        });
+      }
+    },
+
+    flush: function(name) {
+      if(this.handlers[name]) {
+        delete this.handlers[name];
+      }
+    }
+  }
+
   var api = {
     addTag: addElement,
     text: text,
     addEvents: addEvents,
+    dispatcher: Dispatcher,
     render: render
   }
 
