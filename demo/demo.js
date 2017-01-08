@@ -160,4 +160,4 @@ jsHTML.dispatcher.subscribe("render", function(collection) {
   jsHTML.render(App({ collection }), ".container");
 });
 
-jsHTML.render(App({ collection: COLLECTION }), ".container");
+jsHTML.dispatcher.dispatch("render", COLLECTION);
