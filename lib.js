@@ -1,4 +1,12 @@
-var jsHTML = (function() {
+(function(lib) {
+  if(typeof module === "object" && typeof exports === "object") {
+    module.exports = lib();
+  } else if(typeof define === "function" && define.amd) {
+    return define([], lib);
+  } else {
+    window.jsHTML = lib();
+  }
+})(function() {
 
   "use strict";
 
@@ -129,4 +137,4 @@ var jsHTML = (function() {
 
   return API;
 
-})();
+});
