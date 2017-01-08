@@ -112,12 +112,12 @@ var jsHTML = (function() {
 
     flush: function(name) {
       if(this.handlers[name]) {
-        delete this.handlers[name];
+        this.handlers[name] = [];
       }
     }
   }
 
-  var api = {
+  var API = {
     addTag: addElement,
     text: text,
     addEvents: addEvents,
@@ -127,6 +127,6 @@ var jsHTML = (function() {
 
   ELEMENTS.forEach(tag => api[tag] = createNode(tag));
 
-  return api;
+  return API;
 
 })();
