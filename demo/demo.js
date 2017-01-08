@@ -6,6 +6,9 @@ var COLLECTION = [
   {id: 5, name: "Build something meaningful", completed: false}
 ];
 
+for(var i = 6; i <= 500; i++) {
+  COLLECTION.push({id: i, name: "TASK " + i, completed: false});
+}
 var Input = ()  => {
   return jsHTML.input({type: "text", placeholder: "Task name"}, null);
 }
@@ -157,7 +160,9 @@ var App = (props) => {
 }
 
 jsHTML.dispatcher.subscribe("render", function(collection) {
+  console.time();
   jsHTML.render(App({ collection }), ".container");
+  console.timeEnd();
 });
 
 jsHTML.dispatcher.dispatch("render", COLLECTION);

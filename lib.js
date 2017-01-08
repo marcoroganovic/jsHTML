@@ -92,11 +92,19 @@
     }
   }
 
+  function renderIfDifferent(newEl, oldEl) {
+    if(newEl.outerHTML === oldEl.innerHTML) {
+      return;
+    } else {
+      oldEl.innerHTML = "";
+      oldEl.appendChild(newEl);
+    }
+  }
+
   function render(node, selector) {
     var element = document.querySelector(selector);
     if(element) {
-      element.innerHTML = "";
-      element.appendChild(node);
+      renderIfDifferent(node, element);
     } else {
       console.log("Couldn't find DOM node based on provided selector " + selector);
     }
