@@ -110,7 +110,7 @@
     if(element) {
       renderIfDifferent(node, element);
     } else {
-      console.log("Couldn't find DOM node based on provided selector " + selector);
+      console.warn("Couldn't find DOM node based on provided selector " + selector);
     }
   }
 
