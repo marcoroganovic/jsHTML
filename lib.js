@@ -102,7 +102,11 @@
   }
 
   function render(node, selector) {
-    var element = document.querySelector(selector);
+    var element = (
+        typeof selector === "string" ? 
+        document.querySelector(selector) : selector
+    );
+
     if(element) {
       renderIfDifferent(node, element);
     } else {
