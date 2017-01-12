@@ -97,7 +97,9 @@
       return;
     } else {
       container.innerHTML = "";
-      container.appendChild(newNodes);
+      var frag = document.createDocumentFragment();
+      frag.appendChild(newNodes);
+      container.appendChild(frag);
     }
   }
 
